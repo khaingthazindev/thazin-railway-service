@@ -27,6 +27,9 @@ This is a repo for railway service api with laravel(core framework).
 
 <p>You can use x-app-layout because custom component already created under app/View/Components/AppLayout.php. We don't use it so we change x-app-layout of dashboard blade into extend style.</p>
 
+### Tailwind setup
+<p>We need to set prefix for tailwind not to conflict with bootstrap4 of adminLTE so I set prefix in tailwind.config.js (prefix: "tw-"). Laravel breeze auth blade files already use tailwind there are too many files to change that is why we need to use [Tailwind Prefix Changer](https://github.vue.tailwind-prefix.cbass.dev/). Add more content paths that we would use tailwind css in tailwind.config.js. And I want to use .scss instead of .css so link .scss instead of .css in vite.config.js and some layouts blades.</p>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
