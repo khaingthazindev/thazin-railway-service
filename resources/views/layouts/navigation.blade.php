@@ -18,6 +18,10 @@
                <i class="fas fa-user-edit mr-2"></i> Edit profile
             </a>
             <div class="dropdown-divider"></div>
+            <a href="{{route('change-password.edit')}}" class="dropdown-item">
+               <i class="fas fa-user-edit mr-2"></i> Change Password
+            </a>
+            <div class="dropdown-divider"></div>
             <form method="POST" action="{{ route('logout') }}">
                @csrf
                <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();"
