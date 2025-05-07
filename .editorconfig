@@ -1,18 +1,33 @@
+# .editorconfig
 root = true
 
 [*]
+indent_style = tab
+indent_size = 3
 charset = utf-8
-end_of_line = lf
-indent_size = 4
-indent_style = space
-insert_final_newline = true
 trim_trailing_whitespace = true
+insert_final_newline = true
 
-[*.md]
-trim_trailing_whitespace = false
+[*.blade.php]
+indent_style = tab
+indent_size = 3
 
-[*.{yml,yaml}]
-indent_size = 2
+[*.php]
+indent_style = tab
+indent_size = 3
 
-[docker-compose.yml]
-indent_size = 4
+[*.js]
+indent_style = tab
+indent_size = 3
+
+[*.json]
+indent_style = tab
+indent_size = 3
+
+[*.css]
+indent_style = tab
+indent_size = 3
+
+[*.html]
+indent_style = tab
+indent_size = 3

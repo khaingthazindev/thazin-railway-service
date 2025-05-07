@@ -1,0 +1,67 @@
+table.dataTable thead th {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	background-color: #f0fdfa;
+}
+
+table.dataTable tbody td {
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+table.dataTable thead th,
+table.dataTable tbody td,
+.dt-container .dt-length,
+.dt-container .dt-info,
+div.dt-container div.dt-search input {
+	font-size: 15px;
+}
+
+div.dt-container div.dt-search input {
+	margin-left: 0.5em;
+	display: inline-block;
+	width: auto;
+	border: 1px solid #e8e8e8;
+}
+
+table.dataTable.dtr-column > tbody > tr > td.dtr-control:before,
+table.dataTable.dtr-column > tbody > tr > th.dtr-control:before,
+table.dataTable.dtr-column > tbody > tr > td.control:before,
+table.dataTable.dtr-column > tbody > tr > th.control:before {
+	content: '+';
+	background: #8ccead;
+	border-radius: 100%;
+	width: 18px;
+	height: 18px;
+	line-height: 12px;
+	border: 1px solid #1cbc9b;
+	color: #fff;
+}
+
+table.dataTable.dtr-column > tbody > tr.dtr-expanded td.dtr-control:before,
+table.dataTable.dtr-column > tbody > tr.dtr-expanded th.dtr-control:before,
+table.dataTable.dtr-column > tbody > tr.dtr-expanded td.control:before,
+table.dataTable.dtr-column > tbody > tr.dtr-expanded th.control:before {
+	content: '-';
+	background: #dba293;
+	border-radius: 100%;
+	width: 18px;
+	height: 18px;
+	line-height: 12px;
+	border: 1px solid #dba293;
+	color: #fff;
+}
+
+.page-item.active .page-link {
+	z-index: 3;
+	color: #fff;
+	background-color: #8ccead;
+	border-color: #8ccead;
+}
+
+@media screen and (max-width: 767px) {
+	div.dt-container div.row > * {
+		margin-bottom: 0.5rem;
+		display: flex;
+	}
+}

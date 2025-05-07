@@ -30,6 +30,9 @@
    <!-- Toastr -->
    <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
 
+   <!-- Datatable -->
+   <link rel="stylesheet" href="{{asset('plugins/datatables/datatables.min.css')}}">
+
    <!-- Theme style -->
    <link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
 
@@ -94,6 +97,9 @@
 
    <!-- Toastr -->
    <script src="{{asset('plugins/toastr/toastr.min.js')}}"></script>
+
+   <!-- Datatable -->
+   <script src="{{asset('plugins/datatables/datatables.min.js')}}"></script>
 
    <!-- AdminLTE App -->
    <script src="{{asset('js/adminlte.js')}}"></script>
