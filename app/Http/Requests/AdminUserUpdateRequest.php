@@ -23,7 +23,7 @@ class AdminUserUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'email', 'unique:admin_users,email,' . $this->route('admin_user')->id],
+            'email' => ['required', 'email', 'unique:admin_users,email,' . $this->route('admin_user')],
         ];
     }
 }
