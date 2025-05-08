@@ -37,7 +37,7 @@
 @push('scripts')
 	<script>
 		$(document).ready(function () {
-			new DataTable('.Datatable-tb', {
+			let datatableTb = new DataTable('.Datatable-tb', {
 				processing: true,
 				serverSide: true,
 
@@ -79,6 +79,24 @@
 						type: 'column',
 					}
 				}
+			});
+
+			$(document).on('click', '.delete-button', function (e) {
+				e.preventDefault();
+				let deleteUrl = $(this).data('url');
+				deleteDialog.fire({}).then((result) => {
+					if (result.isConfirmed) {
+						$.ajax({
+							url: deleteUrl,
+							method: 'DELETE',
+							success: function (response) {
+								datatableTb.ajax.reload();
+
+								toastr.success(response.message);
+							}
+						});
+					}
+				});
 			});
 		});
 	</script>

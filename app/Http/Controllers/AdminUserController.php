@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminUser;
+use App\Services\ResponseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -76,6 +77,17 @@ class AdminUserController extends Controller
          return redirect()->route('admin-user.index')->with('success', 'Successfully updated');
       } catch (\Exception $e) {
          return back()->with('error', $e->getMessage());
+      }
+   }
+
+   public function destroy(AdminUser $admin_user)
+   {
+      try {
+         $admin_user->delete();
+
+         return ResponseService::success([], 'Successfully deleted');
+      } catch (\Exception $e) {
+         return ResponseService::fail($e->getMessage());
       }
    }
 }
