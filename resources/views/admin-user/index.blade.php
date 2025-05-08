@@ -8,7 +8,12 @@
 			<i class="fas fa-user tw-p-3 tw-bg-white tw-rounded-lg tw-shadow tw-mr-1"></i>
 			<h5>Admin User</h5>
 		</div>
-		<div></div>
+		<div>
+			<x-create-button href="{{route('admin-user.create')}}">
+				<i class="fas fa-plus-circle tw-mr-1"></i>
+				Create
+			</x-create-button>
+		</div>
 	</div>
 @endsection
 
