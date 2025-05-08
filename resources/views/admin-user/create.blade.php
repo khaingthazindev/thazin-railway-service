@@ -33,7 +33,7 @@
 			</div>
 
 			<div class="tw-flex tw-justify-center tw-items-center tw-gap-4">
-				<x-cancel-button href="{{route('dashboard')}}">Cancel</x-cancel-button>
+				<x-cancel-button href="{{route('admin-user.index')}}">Cancel</x-cancel-button>
 				<x-confirm-button>Confirm</x-confirm-button>
 			</div>
 		</form>

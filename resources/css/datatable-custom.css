@@ -33,7 +33,7 @@ table.dataTable.dtr-column > tbody > tr > th.control:before {
 	border-radius: 100%;
 	width: 18px;
 	height: 18px;
-	line-height: 12px;
+	line-height: 16px;
 	border: 1px solid #1cbc9b;
 	color: #fff;
 }
@@ -47,7 +47,7 @@ table.dataTable.dtr-column > tbody > tr.dtr-expanded th.control:before {
 	border-radius: 100%;
 	width: 18px;
 	height: 18px;
-	line-height: 12px;
+	line-height: 16px;
 	border: 1px solid #dba293;
 	color: #fff;
 }
