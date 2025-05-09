@@ -38,6 +38,15 @@
                   </p>
                </a>
             </li>
+
+            <li class="nav-item">
+               <a href="{{route('ticket-inspector.index')}}" class="nav-link @yield('ticket-inspector-page-active')">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>
+                     Ticket Inspector
+                  </p>
+               </a>
+            </li>
             {{-- <li class="nav-item">
                <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-copy"></i>
