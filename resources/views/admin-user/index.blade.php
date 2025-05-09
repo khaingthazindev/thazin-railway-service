@@ -25,6 +25,7 @@
 					<th></th>
 					<th class="text-center">Name</th>
 					<th class="text-center">Email</th>
+					<th class="text-center">Verified at</th>
 					<th class="text-center">Created at</th>
 					<th class="text-center">Updated at</th>
 					<th class="text-center no-sort no-search">Action</th>
@@ -50,6 +51,7 @@
 					{ data: 'responsive-icon', class: 'text-center' },
 					{ data: 'name', class: 'text-center' },
 					{ data: 'email', class: 'text-center' },
+					{ data: 'email_verified_at', class: 'text-center' },
 					{ data: 'created_at', class: 'text-center' },
 					{ data: 'updated_at', class: 'text-center' },
 					{ data: 'action', class: 'text-center' },

@@ -46,6 +46,9 @@ class AdminUserRepository implements BaseRepository
 		$model = $this->model::query();
 
 		return DataTables::eloquent($model)
+			->editColumn('email_verified_at', function ($row) {
+				return $row->email_verified_at?->format('Y-m-d H:i:s');
+			})
 			->editColumn('created_at', function ($row) {
 				return $row->created_at->format('Y-m-d H:i:s');
 			})
