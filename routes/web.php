@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WalletController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
@@ -37,6 +38,9 @@ Route::middleware(['auth:admin_users', 'verified'])->group(function () {
 
    Route::resource('/user', UserController::class);
    Route::get('/user-datatable', [UserController::class, 'datatable'])->name('user-datatable');
+
+   Route::resource('/wallet', WalletController::class)->only(['index']);
+   Route::get('/wallet-datatable', [WalletController::class, 'datatable'])->name('wallet-datatable');
 
    Route::resource('/ticket-inspector', TicketInspectorController::class);
    Route::get('/ticket-inspector-datatable', [TicketInspectorController::class, 'datatable'])->name('ticket-inspector-datatable');

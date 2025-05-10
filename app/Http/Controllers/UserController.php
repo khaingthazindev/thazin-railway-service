@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\UserRepository;
+use App\Repositories\WalletRepository;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,9 +13,11 @@ use App\Http\Requests\UserUpdateRequest;
 class UserController extends Controller
 {
    protected $repo;
-   public function __construct(UserRepository $userRepository)
+   protected $walletRepo;
+   public function __construct(UserRepository $userRepository, WalletRepository $walletRepo)
    {
       $this->repo = $userRepository;
+      $this->walletRepo = $walletRepo;
    }
    public function index()
    {
@@ -36,11 +39,16 @@ class UserController extends Controller
    public function store(UserStoreRequest $request)
    {
       try {
-         $this->repo->create([
+         $user = $this->repo->create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
          ]);
+
+         $this->walletRepo->firstOrCreate(
+            ['user_id' => $user->id],
+            ['amount' => 0]
+         );
 
          return redirect()->route('user.index')->with('success', 'Successfully created');
       } catch (\Exception $e) {
