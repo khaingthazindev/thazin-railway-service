@@ -1,18 +1,18 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Wallet;
+use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Repositories\Contracts\BaseRepository;
 
-class WalletRepository implements BaseRepository
+class WalletTransactionRepository implements BaseRepository
 {
 	protected $model;
 
 	public function __construct()
 	{
-		$this->model = Wallet::class;
+		$this->model = WalletTransaction::class;
 	}
 
 	public function find($id)
@@ -27,25 +27,12 @@ class WalletRepository implements BaseRepository
 		return $model;
 	}
 
-	public function firstOrCreate(array $data1, array $data2)
-	{
-		$model = $this->model::firstOrCreate($data1, $data2);
-		return $model;
-	}
-
-
 	public function update(array $data, $id)
 	{
-		$model = $this->find($id);
-		$model->update($data);
-		return $model;
 	}
 
 	public function delete($id)
 	{
-		$model = $this->find($id);
-		$model->delete();
-		return $model;
 	}
 
 	public function datatable(Request $request)
@@ -69,12 +56,5 @@ class WalletRepository implements BaseRepository
 				return '';
 			})
 			->toJson();
-	}
-
-	public function addAmount($wallet_id, $amount)
-	{
-		$model = $this->model::lockForUpdate()->findOrFail($wallet_id);
-		$model->increment('amount', $amount);
-		return $model;
 	}
 }

@@ -10,6 +10,10 @@
 			<h5>Wallet</h5>
 		</div>
 		<div>
+			<x-create-button href="{{route('wallet-add-amount')}}">
+				<i class="fas fa-plus-circle tw-mr-1"></i>
+				Add Amount
+			</x-create-button>
 		</div>
 	</div>
 @endsection

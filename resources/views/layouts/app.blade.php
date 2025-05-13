@@ -36,6 +36,9 @@
 	<!-- Theme style -->
 	<link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
 
+	<!-- Select2 -->
+	<link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
+
 	<!-- Scripts -->
 	@vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
@@ -100,6 +103,9 @@
 
 	<!-- Datatable -->
 	<script src="{{asset('plugins/datatables/datatables.min.js')}}"></script>
+
+	<!-- Select2 -->
+	<script src="{{asset('plugins/select2/js/select2.min.js')}}"></script>
 
 	<!-- AdminLTE App -->
 	<script src="{{asset('js/adminlte.js')}}"></script>
