@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Str;
 use App\Repositories\WalletRepository;
 use App\Repositories\WalletTransactionRepository;
 
@@ -14,6 +15,7 @@ class WalletService
 
 		// Wallet transaction
 		(new WalletTransactionRepository())->create([
+			'trx_id' => 'TRX-' . Str::random(10),
 			'wallet_id' => $data['wallet_id'],
 			'user_id' => $wallet->user_id,
 			'sourceable_id' => $data['sourceable_id'],
@@ -31,6 +33,7 @@ class WalletService
 		$wallet = (new WalletRepository())->reduceAmount($data['wallet_id'], $data['amount']);
 		// Wallet transaction
 		(new WalletTransactionRepository())->create([
+			'trx_id' => 'TRX-' . Str::random(10),
 			'wallet_id' => $data['wallet_id'],
 			'user_id' => $wallet->user_id,
 			'sourceable_id' => $data['sourceable_id'],

@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-dark-teal">
    <!-- Brand Logo -->
-   <a href="index3.html" class="brand-link">
+   <a href="{{route('dashboard')}}" class="brand-link">
       <img src="{{asset('image/logo.png')}}" alt="{{config('app.name')}}" class="brand-image img-circle elevation-3"
          style="opacity: .8">
       <span class="brand-text font-weight-light">Railway Service</span>
