@@ -14,6 +14,10 @@
 				<i class="fas fa-plus-circle tw-mr-1"></i>
 				Add Amount
 			</x-create-button>
+			<x-create-button href="{{route('wallet-reduce-amount')}}">
+				<i class="fas fa-minus-circle tw-mr-1"></i>
+				Reduce Amount
+			</x-create-button>
 		</div>
 	</div>
 @endsection

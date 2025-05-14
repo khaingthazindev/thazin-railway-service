@@ -77,4 +77,14 @@ class WalletRepository implements BaseRepository
 		$model->increment('amount', $amount);
 		return $model;
 	}
+
+	public function reduceAmount($wallet_id, $amount)
+	{
+		$model = $this->model::lockForUpdate()->findOrFail($wallet_id);
+		if ($model->amount < $amount) {
+			throw new \Exception('Insufficient amount');
+		}
+		$model->decrement('amount', $amount);
+		return $model;
+	}
 }

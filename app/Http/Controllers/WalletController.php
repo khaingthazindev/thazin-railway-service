@@ -7,6 +7,7 @@ use App\Services\WalletService;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\WalletRepository;
 use App\Http\Requests\WalletAddAmountStoreRequest;
+use App\Http\Requests\WalletReduceAmountStoreRequest;
 
 class WalletController extends Controller
 {
@@ -48,6 +49,33 @@ class WalletController extends Controller
             DB::commit();
 
             return redirect()->route('wallet.index')->with('success', 'Successfully added amount.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage())->withInput()->withInput();
+        }
+    }
+
+    public function reduceAmount()
+    {
+        $selected_wallet = old('wallet_id') ? $this->repo->find(old('wallet_id')) : null;
+        return view('wallet.reduce-amount', compact('selected_wallet'));
+    }
+
+    public function reduceAmountStore(WalletReduceAmountStoreRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            WalletService::reduceAmount([
+                'wallet_id' => $request->wallet_id,
+                'sourceable_id' => null,
+                'sourceable_type' => null,
+                'type' => 'manual',
+                'amount' => $request->amount,
+                'description' => $request->description,
+            ]);
+            DB::commit();
+
+            return redirect()->route('wallet.index')->with('success', 'Successfully reduced amount.');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage())->withInput()->withInput();

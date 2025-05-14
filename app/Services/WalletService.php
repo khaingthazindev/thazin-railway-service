@@ -24,4 +24,21 @@ class WalletService
 			'description' => $data['description'],
 		]);
 	}
+
+	public static function reduceAmount(array $data)
+	{
+		// Wallet add mount 
+		$wallet = (new WalletRepository())->reduceAmount($data['wallet_id'], $data['amount']);
+		// Wallet transaction
+		(new WalletTransactionRepository())->create([
+			'wallet_id' => $data['wallet_id'],
+			'user_id' => $wallet->user_id,
+			'sourceable_id' => $data['sourceable_id'],
+			'sourceable_type' => $data['sourceable_type'],
+			'method' => 'reduce',
+			'type' => $data['type'],
+			'amount' => $data['amount'],
+			'description' => $data['description'],
+		]);
+	}
 }

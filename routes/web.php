@@ -44,6 +44,8 @@ Route::middleware(['auth:admin_users', 'verified'])->group(function () {
    Route::get('/wallet-datatable', [WalletController::class, 'datatable'])->name('wallet-datatable');
    Route::get('/wallet-add-amount', [WalletController::class, 'addAmount'])->name('wallet-add-amount');
    Route::post('/wallet-add-amount', [WalletController::class, 'addAmountStore'])->name('wallet-add-amount.store');
+   Route::get('/wallet-reduce-amount', [WalletController::class, 'reduceAmount'])->name('wallet-reduce-amount');
+   Route::post('/wallet-reduce-amount', [WalletController::class, 'reduceAmountStore'])->name('wallet-reduce-amount.store');
 
    Route::resource('/ticket-inspector', TicketInspectorController::class);
    Route::get('/ticket-inspector-datatable', [TicketInspectorController::class, 'datatable'])->name('ticket-inspector-datatable');
