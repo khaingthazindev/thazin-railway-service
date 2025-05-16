@@ -7,6 +7,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>@yield('title')</title>
+	<link rel="shortcut icon" type="image/x-icon" href="{{asset('image/logo.png')}}">
 
 	{{-- Poppins google font --}}
 	<link rel="preconnect" href="https://fonts.googleapis.com">

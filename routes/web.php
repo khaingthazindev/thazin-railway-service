@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\WalletTransaction;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalletController;
@@ -7,8 +8,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Select2AjaxController;
+use App\Http\Controllers\TopUpHistoryController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\TicketInspectorController;
+use App\Http\Controllers\WalletTransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +49,12 @@ Route::middleware(['auth:admin_users', 'verified'])->group(function () {
    Route::post('/wallet-add-amount', [WalletController::class, 'addAmountStore'])->name('wallet-add-amount.store');
    Route::get('/wallet-reduce-amount', [WalletController::class, 'reduceAmount'])->name('wallet-reduce-amount');
    Route::post('/wallet-reduce-amount', [WalletController::class, 'reduceAmountStore'])->name('wallet-reduce-amount.store');
+
+   Route::resource('/wallet-transaction', WalletTransactionController::class)->only(['index', 'show']);
+   Route::get('/wallet-transaction-datatable', [WalletTransactionController::class, 'datatable'])->name('wallet-transaction-datatable');
+
+   Route::resource('/top-up-history', TopUpHistoryController::class)->only(['index', 'show']);
+   Route::get('/top-up-history-datatable', [TopUpHistoryController::class, 'datatable'])->name('top-up-history-datatable');
 
    Route::resource('/ticket-inspector', TicketInspectorController::class);
    Route::get('/ticket-inspector-datatable', [TicketInspectorController::class, 'datatable'])->name('ticket-inspector-datatable');

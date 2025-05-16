@@ -47,6 +47,23 @@
                </a>
             </li>
             <li class="nav-item">
+               <a href="{{route('wallet-transaction.index')}}"
+                  class="nav-link @yield('wallet-transaction-page-active')">
+                  <i class="nav-icon fas fa-wallet"></i>
+                  <p>
+                     Wallet Transaction
+                  </p>
+               </a>
+            </li>
+            <li class="nav-item">
+               <a href="{{route('top-up-history.index')}}" class="nav-link @yield('top-up-history-page-active')">
+                  <i class="nav-icon fas fa-wallet"></i>
+                  <p>
+                     Top Up History
+                  </p>
+               </a>
+            </li>
+            <li class="nav-item">
                <a href="{{route('ticket-inspector.index')}}" class="nav-link @yield('ticket-inspector-page-active')">
                   <i class="nav-icon fas fa-user"></i>
                   <p>

@@ -1,18 +1,18 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\WalletTransaction;
+use App\Models\TopUpHistory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Repositories\Contracts\BaseRepository;
 
-class WalletTransactionRepository implements BaseRepository
+class TopUpHistoryRepository implements BaseRepository
 {
 	protected $model;
 
 	public function __construct()
 	{
-		$this->model = WalletTransaction::class;
+		$this->model = TopUpHistory::class;
 	}
 
 	public function find($id)
@@ -29,6 +29,9 @@ class WalletTransactionRepository implements BaseRepository
 
 	public function update(array $data, $id)
 	{
+		$model = $this->find($id);
+		$model->update($data);
+		return $model;
 	}
 
 	public function delete($id)
@@ -43,14 +46,11 @@ class WalletTransactionRepository implements BaseRepository
 			->addColumn('user_name', function ($row) {
 				return $row->user ? ("{$row->user->name} ({$row->user->email})") : '';
 			})
-			->editColumn('method', function ($row) {
-				return '<span style="color: ' . $row->method["color"] . '">' . $row->method["text"] . '</span>';
-			})
-			->editColumn('type', function ($row) {
-				return '<span style="color: ' . $row->type["color"] . '">' . $row->type["text"] . '</span>';
-			})
 			->editColumn('amount', function ($row) {
 				return number_format($row->amount);
+			})
+			->editColumn('status', function ($row) {
+				return '<span style="color: ' . $row->status["color"] . '">' . $row->status["text"] . '</span>';
 			})
 			->editColumn('created_at', function ($row) {
 				return $row->created_at->format('Y-m-d H:i:s');
@@ -59,14 +59,14 @@ class WalletTransactionRepository implements BaseRepository
 				return $row->updated_at->format('Y-m-d H:i:s');
 			})
 			->addColumn('action', function ($row) {
-				return view('wallet-transaction._action', [
-					'wallet_transaction' => $row,
+				return view('top-up-history._action', [
+					'top_up_history' => $row,
 				]);
 			})
 			->addColumn('responsive-icon', function ($row) {
 				return '';
 			})
-			->rawColumns(['method', 'type'])
+			->rawColumns(['status'])
 			->filterColumn('user_name', function ($query, $keyword) {
 				$query->whereHas('user', function ($q1) use ($keyword) {
 					$q1->where('name', 'like', "%{$keyword}%")
