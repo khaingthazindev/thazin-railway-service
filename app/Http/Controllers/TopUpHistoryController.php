@@ -26,7 +26,7 @@ class TopUpHistoryController extends Controller
 
     public function show($id)
     {
-        $wallet_transaction = $this->repo->find($id);
-        return view('top-up-history.show', compact('wallet_transaction'));
+        $top_up_history = $this->repo->find($id);
+        return view('top-up-history.show', compact('top_up_history'));
     }
 }

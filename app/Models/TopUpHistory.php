@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class TopUpHistory extends Model
@@ -56,6 +57,15 @@ class TopUpHistory extends Model
                     'text' => $text,
                     'color' => $color
                 ];
+            },
+        );
+    }
+
+    public function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: function (mixed $value, array $attributes) {
+                return Storage::url('top-up-history/' . $attributes['image']);
             },
         );
     }

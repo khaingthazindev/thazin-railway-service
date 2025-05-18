@@ -17,7 +17,7 @@ class TopUpHistoryRepository implements BaseRepository
 
 	public function find($id)
 	{
-		$model = $this->model::with(['user:id,name,email', 'sourceable'])->find($id);
+		$model = $this->model::with(['user:id,name,email'])->find($id);
 		return $model;
 	}
 
@@ -49,6 +49,9 @@ class TopUpHistoryRepository implements BaseRepository
 			->editColumn('amount', function ($row) {
 				return number_format($row->amount);
 			})
+			->editColumn('image', function ($row) {
+				return '<img src="' . $row->image_url . '" alt="" class="tw-w-10 tw-rounded">';
+			})
 			->editColumn('status', function ($row) {
 				return '<span style="color: ' . $row->status["color"] . '">' . $row->status["text"] . '</span>';
 			})
@@ -66,7 +69,7 @@ class TopUpHistoryRepository implements BaseRepository
 			->addColumn('responsive-icon', function ($row) {
 				return '';
 			})
-			->rawColumns(['status'])
+			->rawColumns(['image', 'status'])
 			->filterColumn('user_name', function ($query, $keyword) {
 				$query->whereHas('user', function ($q1) use ($keyword) {
 					$q1->where('name', 'like', "%{$keyword}%")

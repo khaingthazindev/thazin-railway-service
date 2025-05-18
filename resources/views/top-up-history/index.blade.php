@@ -16,7 +16,7 @@
 
 @section('content')
 	<x-card class="tw-pb-5">
-		<table class="table table-bordered Datatable-tb">
+		<table class="table table-bordered Datatable-tb" id="images">
 			<thead>
 				<tr>
 					<th></th>
@@ -37,6 +37,8 @@
 @push('scripts')
 	<script>
 		$(document).ready(function () {
+			let images = new Viewer(document.getElementById('images'));
+
 			let datatableTb = new DataTable('.Datatable-tb', {
 				processing: true,
 				serverSide: true,
@@ -81,6 +83,10 @@
 						target: 0,
 						type: 'column',
 					}
+				},
+				drawCallback: function () { //after datatable draw
+					images.destroy(); // not to duplicate viewer instance on same DOM
+					images = new Viewer(document.getElementById('images'));
 				}
 			});
 		});
