@@ -32,13 +32,13 @@ class TopUpHistory extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    protected function status(): Attribute
+    protected function acsrStatus(): Attribute
     {
         return Attribute::make(
-            get: function (string $value) {
-                $text = $value ? ucfirst(str_replace('_', '', $value)) : '';
+            get: function (mixed $value, array $attributes) {
+                $text = $attributes['status'] ? ucfirst(str_replace('_', '', $attributes['status'])) : '';
                 $color = '';
-                switch ($value) {
+                switch ($attributes['status']) {
                     case 'pending':
                         $color = '#ea580c';
                         break;

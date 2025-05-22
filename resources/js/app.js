@@ -6,10 +6,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 window.Alpine = Alpine;
 window.Swal = Swal;
 
-window.deleteDialog = Swal.mixin({
-	title: 'Are you sure, you want to delete?',
-	text: '',
-	icon: 'error',
+window.confirmDialog = Swal.mixin({
+	icon: 'warning',
 	customClass: {
 		confirmButton: 'btn btn-danger',
 		cancelButton: 'btn btn-secondary mr-2',

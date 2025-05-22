@@ -87,7 +87,9 @@
 			$(document).on('click', '.delete-button', function (e) {
 				e.preventDefault();
 				let deleteUrl = $(this).data('url');
-				deleteDialog.fire({}).then((result) => {
+				confirmDialog.fire({
+					title: 'Are you sure, you want to delete?'
+				}).then((result) => {
 					if (result.isConfirmed) {
 						$.ajax({
 							url: deleteUrl,

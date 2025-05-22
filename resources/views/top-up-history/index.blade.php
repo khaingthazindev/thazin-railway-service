@@ -89,6 +89,46 @@
 					images = new Viewer(document.getElementById('images'));
 				}
 			});
+
+			$(document).on('click', '.reject-button', function (e) {
+				e.preventDefault();
+				let rejectUrl = $(this).data('url');
+				confirmDialog.fire({
+					title: 'Are you sure, you want to reject?',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						$.ajax({
+							url: rejectUrl,
+							method: 'POST',
+							success: function (response) {
+								datatableTb.ajax.reload();
+
+								toastr.success(response.message);
+							}
+						});
+					}
+				});
+			});
+
+			$(document).on('click', '.approve-button', function (e) {
+				e.preventDefault();
+				let approveUrl = $(this).data('url');
+				confirmDialog.fire({
+					title: 'Are you sure, you want to approve?',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						$.ajax({
+							url: approveUrl,
+							method: 'POST',
+							success: function (response) {
+								datatableTb.ajax.reload();
+
+								toastr.success(response.message);
+							}
+						});
+					}
+				});
+			});
 		});
 	</script>
 @endpush

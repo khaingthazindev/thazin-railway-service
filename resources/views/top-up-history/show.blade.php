@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Top Up History Detail')
-@section('wallet-transaction-page-active', 'active')
+@section('top-up-history-page-active', 'active')
 
 @section('header')
 	<div class="tw-flex tw-justify-between tw-items-center">
@@ -42,7 +42,8 @@
 					<td class="text-left" style="width: 45%;">Status</td>
 					<td class="text-center" style="width: 10%;">...</td>
 					<td class="text-right" style="width: 45%;"><span
-							style="color: {{$top_up_history->status['color']}}">{{$top_up_history->status['text']}}</span></td>
+							style="color: {{$top_up_history->acsrStatus['color']}}">{{$top_up_history->acsrStatus['text']}}</span>
+					</td>
 				</tr>
 				<tr>
 					<td class="text-left" style="width: 45%;">Approved At</td>
@@ -69,7 +70,8 @@
 					<td class="text-center" style="width: 10%;">...</td>
 					<td class="text-right" style="width: 45%;">
 						<div class="tw-flex tw-justify-end tw-align-items-center">
-							<img src="{{$top_up_history->imageUrl}}" alt="" class="tw-w-20 tw-rounded" id="image">
+							<img src="{{$top_up_history->imageUrl}}" alt="" class="tw-w-20 tw-rounded tw-cursor-pointer"
+								id="image">
 						</div>
 					</td>
 				</tr>
