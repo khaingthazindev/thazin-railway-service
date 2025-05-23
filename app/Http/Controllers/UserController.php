@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\UserRepository;
-use App\Repositories\WalletRepository;
-use App\Services\ResponseService;
 use Illuminate\Http\Request;
+use App\Services\ResponseService;
+use Illuminate\Support\Facades\DB;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
+use App\Repositories\WalletRepository;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 
@@ -38,6 +39,7 @@ class UserController extends Controller
 
    public function store(UserStoreRequest $request)
    {
+      DB::beginTransaction();
       try {
          $user = $this->repo->create([
             'name' => $request->name,
@@ -50,8 +52,10 @@ class UserController extends Controller
             ['amount' => 0]
          );
 
+         DB::commit();
          return redirect()->route('user.index')->with('success', 'Successfully created');
       } catch (\Exception $e) {
+         DB::rollBack();
          return back()->with('error', $e->getMessage())->withInput();
       }
    }

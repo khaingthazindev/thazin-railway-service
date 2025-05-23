@@ -34,14 +34,20 @@
 	<!-- Datatable -->
 	<link rel="stylesheet" href="{{asset('plugins/datatables/datatables.min.css')}}">
 
-	<!-- Theme style -->
-	<link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
-
 	<!-- Select2 -->
 	<link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
 
 	<!-- Viewer -->
 	<link rel="stylesheet" href="{{asset('plugins/viewer/viewer.min.css')}}">
+
+	<!-- leaflet -->
+	<link rel="stylesheet" href="{{asset('plugins/leaflet/leaflet.css')}}">
+
+	<!-- leaflet location picker -->
+	<link rel="stylesheet" href="{{asset('plugins/leaflet-locationpicker/leaflet-locationpicker.css')}}">
+
+	<!-- Theme style -->
+	<link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
 
 	<!-- Scripts -->
 	@vite(['resources/scss/app.scss', 'resources/js/app.js'])
@@ -113,6 +119,12 @@
 
 	<!-- Viewer -->
 	<script src="{{asset('plugins/viewer/viewer.min.js')}}"></script>
+
+	<!-- leaflet -->
+	<script src="{{asset('plugins/leaflet/leaflet.js')}}"></script>
+
+	<!-- leaflet location picker -->
+	<script src="{{asset('plugins/leaflet-locationpicker/leaflet-locationpicker.js')}}"></script>
 
 	<!-- AdminLTE App -->
 	<script src="{{asset('js/adminlte.js')}}"></script>
