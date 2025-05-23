@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Station;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Repositories\Contracts\BaseRepository;
@@ -46,6 +47,9 @@ class StationRepository implements BaseRepository
 		$model = $this->model::query();
 
 		return DataTables::eloquent($model)
+			->editColumn('description', function ($row) {
+				return Str::limit($row->description, 50);
+			})
 			->editColumn('created_at', function ($row) {
 				return $row->created_at->format('Y-m-d H:i:s');
 			})
