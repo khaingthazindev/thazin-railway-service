@@ -50,14 +50,19 @@
 					</td>
 				</tr>
 				<tr>
+					<td class="text-left" style="width: 45%;">Description</td>
+					<td class="text-center" style="width: 10%;">...</td>
+					<td class="text-right" style="width: 45%;">{{$wallet_transaction->description}}</td>
+				</tr>
+				<tr>
 					<td class="text-left" style="width: 45%;">Created At</td>
 					<td class="text-center" style="width: 10%;">...</td>
 					<td class="text-right" style="width: 45%;">{{$wallet_transaction->created_at}}</td>
 				</tr>
 				<tr>
-					<td class="text-left" style="width: 45%;">Description</td>
+					<td class="text-left" style="width: 45%;">Updated At</td>
 					<td class="text-center" style="width: 10%;">...</td>
-					<td class="text-right" style="width: 45%;">{{$wallet_transaction->description}}</td>
+					<td class="text-right" style="width: 45%;">{{$wallet_transaction->updated_at}}</td>
 				</tr>
 			</tbody>
 		</table>

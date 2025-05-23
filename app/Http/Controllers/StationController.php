@@ -32,6 +32,12 @@ class StationController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $station = $this->repo->find($id);
+        return view('station.show', compact('station'));
+    }
+
     public function create()
     {
         return view('station.create');
