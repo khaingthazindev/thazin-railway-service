@@ -3,6 +3,7 @@
 use App\Models\WalletTransaction;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RouteController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StationController;
@@ -62,10 +63,14 @@ Route::middleware(['auth:admin_users', 'verified'])->group(function () {
    Route::resource('/station', StationController::class);
    Route::get('/station-datatable', [StationController::class, 'datatable'])->name('station-datatable');
 
+   Route::resource('/route', RouteController::class);
+   Route::get('/route-datatable', [RouteController::class, 'datatable'])->name('route-datatable');
+
    Route::resource('/ticket-inspector', TicketInspectorController::class);
    Route::get('/ticket-inspector-datatable', [TicketInspectorController::class, 'datatable'])->name('ticket-inspector-datatable');
 
    Route::prefix('select2-ajax')->name('select2-ajax.')->group(function () {
       Route::get('wallet', [Select2AjaxController::class, 'wallet'])->name('wallet');
+      Route::get('station', [Select2AjaxController::class, 'station'])->name('station');
    });
 });

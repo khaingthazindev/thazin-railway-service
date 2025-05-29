@@ -5,20 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Services\ResponseService;
-use App\Repositories\StationRepository;
-use App\Http\Requests\StationStoreRequest;
-use App\Http\Requests\StationUpdateRequest;
+use App\Repositories\RouteStationRepository;
+use App\Http\Requests\RouteStationStoreRequest;
+use App\Http\Requests\RouteStationUpdateRequest;
 
-class StationController extends Controller
+class RouteStationController extends Controller
 {
     protected $repo;
-    public function __construct(StationRepository $stationRepository)
+    public function __construct(RouteStationRepository $routeStationRepository)
     {
-        $this->repo = $stationRepository;
+        $this->repo = $routeStationRepository;
     }
     public function index()
     {
-        return view('station.index');
+        return view('routeStation.index');
     }
 
     public function datatable(Request $request)
@@ -30,16 +30,16 @@ class StationController extends Controller
 
     public function show($id)
     {
-        $station = $this->repo->find($id);
-        return view('station.show', compact('station'));
+        $routeStation = $this->repo->find($id);
+        return view('routeStation.show', compact('routeStation'));
     }
 
     public function create()
     {
-        return view('station.create');
+        return view('routeStation.create');
     }
 
-    public function store(StationStoreRequest $request)
+    public function store(RouteStationStoreRequest $request)
     {
         try {
             $location = explode(',', $request->location);
@@ -51,7 +51,7 @@ class StationController extends Controller
                 'longitude' => $location[1],
             ]);
 
-            return redirect()->route('station.index')->with('success', 'Successfully created');
+            return redirect()->routeStation('routeStation.index')->with('success', 'Successfully created');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage())->withInput();
         }
@@ -59,11 +59,11 @@ class StationController extends Controller
 
     public function edit($id)
     {
-        $station = $this->repo->find($id);
-        return view('station.edit', compact('station'));
+        $routeStation = $this->repo->find($id);
+        return view('routeStation.edit', compact('routeStation'));
     }
 
-    public function update(StationUpdateRequest $request, $id)
+    public function update(RouteStationUpdateRequest $request, $id)
     {
         try {
             $location = explode(',', $request->location);
@@ -75,7 +75,7 @@ class StationController extends Controller
                 'longitude' => $location[1],
             ], $id);
 
-            return redirect()->route('station.index')->with('success', 'Successfully updated');
+            return redirect()->routeStation('routeStation.index')->with('success', 'Successfully updated');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage())->withInput();
         }

@@ -51,6 +51,8 @@
 
 	<!-- Scripts -->
 	@vite(['resources/scss/app.scss', 'resources/js/app.js'])
+
+	@yield('styles')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -125,6 +127,9 @@
 
 	<!-- leaflet location picker -->
 	<script src="{{asset('plugins/leaflet-locationpicker/leaflet-locationpicker.js')}}"></script>
+
+	<!-- repeater -->
+	<script src="{{asset('plugins/jquery-repeater/jquery.repeater.js')}}"></script>
 
 	<!-- AdminLTE App -->
 	<script src="{{asset('js/adminlte.js')}}"></script>
