@@ -4,6 +4,7 @@ use App\Models\WalletTransaction;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StationController;
@@ -69,6 +70,9 @@ Route::middleware(['auth:admin_users', 'verified'])->group(function () {
 
    Route::resource('/ticket-pricing', TicketPricingController::class);
    Route::get('/ticket-pricing-datatable', [TicketPricingController::class, 'datatable'])->name('ticket-pricing-datatable');
+
+   Route::resource('/ticket', TicketController::class);
+   Route::get('/ticket-datatable', [TicketController::class, 'datatable'])->name('ticket-datatable');
 
    Route::resource('/ticket-inspector', TicketInspectorController::class);
    Route::get('/ticket-inspector-datatable', [TicketInspectorController::class, 'datatable'])->name('ticket-inspector-datatable');
