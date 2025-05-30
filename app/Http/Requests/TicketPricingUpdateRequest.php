@@ -23,6 +23,7 @@ class TicketPricingUpdateRequest extends FormRequest
     {
         return [
             'type' => ['required', 'string'],
+            'direction' => ['required_if:type,one_time_ticket'],
             'price' => ['nullable', 'integer'],
             'offer_quantity' => ['required', 'integer'],
             'period' => ['required', 'string'],

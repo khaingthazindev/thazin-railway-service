@@ -43,7 +43,7 @@ class TicketRepository implements BaseRepository
 
 	public function datatable(Request $request)
 	{
-		$model = $this->model::query();
+		$model = $this->model::with(['user:id,name,email']);
 
 		return DataTables::eloquent($model)
 			->addColumn('user_name', function ($row) {
@@ -73,6 +73,12 @@ class TicketRepository implements BaseRepository
 				return '';
 			})
 			->rawColumns(['type', 'direction'])
+			->filterColumn('user_name', function ($query, $keyword) {
+				$query->whereHas('user', function ($q1) use ($keyword) {
+					$q1->where('name', 'like', "%{$keyword}%")
+						->orWhere('email', 'like', "%{$keyword}%");
+				});
+			})
 			->toJson();
 	}
 }

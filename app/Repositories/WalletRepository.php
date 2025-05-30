@@ -68,6 +68,12 @@ class WalletRepository implements BaseRepository
 			->addColumn('responsive-icon', function ($row) {
 				return '';
 			})
+			->filterColumn('user_name', function ($query, $keyword) {
+				$query->whereHas('user', function ($q1) use ($keyword) {
+					$q1->where('name', 'like', "%{$keyword}%")
+						->orWhere('email', 'like', "%{$keyword}%");
+				});
+			})
 			->toJson();
 	}
 

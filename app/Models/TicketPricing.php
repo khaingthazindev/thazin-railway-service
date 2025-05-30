@@ -10,6 +10,7 @@ class TicketPricing extends Model
 {
     protected $fillable = [
         'type',
+        'direction',
         'price',
         'offer_quantity',
         'remain_quantity',
@@ -32,6 +33,34 @@ class TicketPricing extends Model
                     $color = '#16a34a';
                 } else {
                     $color = '#2563eb';
+                }
+
+                return [
+                    'text' => $text,
+                    'color' => $color
+                ];
+            },
+        );
+    }
+
+    protected function acsrDirection(): Attribute
+    {
+        return Attribute::make(
+            get: function (mixed $value, array $attributes) {
+                $text = $attributes['direction'] ? ucwords(Str::replace('_', ' ', $attributes['direction'])) : '';
+
+                switch ($attributes['direction']) {
+                    case 'clockwise':
+                        $color = '#16a34a';
+                        break;
+                    case 'anti_clockwise':
+                        $color = '#2563eb';
+                        break;
+                    case 'both':
+                        $color = '#f59e0b';
+                        break;
+                    default:
+                        $color = '#4b5563';
                 }
 
                 return [

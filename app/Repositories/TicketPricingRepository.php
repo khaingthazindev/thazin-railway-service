@@ -50,6 +50,9 @@ class TicketPricingRepository implements BaseRepository
 			->editColumn('type', function ($row) {
 				return '<span style="color: ' . $row->acsr_type["color"] . '">' . $row->acsr_type["text"] . '</span>';
 			})
+			->editColumn('direction', function ($row) {
+				return '<span style="color: ' . $row->acsr_direction["color"] . '">' . $row->acsr_direction["text"] . '</span>';
+			})
 			->editColumn('price', function ($row) {
 				return number_format($row->price);
 			})
@@ -79,7 +82,7 @@ class TicketPricingRepository implements BaseRepository
 			->addColumn('responsive-icon', function ($row) {
 				return '';
 			})
-			->rawColumns(['type'])
+			->rawColumns(['type', 'direction'])
 			->toJson();
 	}
 }

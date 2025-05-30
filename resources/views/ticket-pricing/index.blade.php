@@ -25,6 +25,7 @@
 				<tr>
 					<th></th>
 					<th class="text-center">Type</th>
+					<th class="text-center">Direction</th>
 					<th class="text-center">Price (MMK)</th>
 					<th class="text-center">Offer quantity</th>
 					<th class="text-center">Remain quantity</th>
@@ -54,6 +55,7 @@
 				columns: [
 					{ data: 'responsive-icon', class: 'text-center' },
 					{ data: 'type', class: 'text-center' },
+					{ data: 'direction', class: 'text-center' },
 					{ data: 'price', class: 'text-center' },
 					{ data: 'offer_quantity', class: 'text-center' },
 					{ data: 'remain_quantity', class: 'text-center' },
@@ -64,7 +66,7 @@
 					{ data: 'action', class: 'text-center' },
 				],
 				order: [
-					[8, 'desc'],
+					[9, 'desc'],
 				],
 				columnDefs: [
 					{

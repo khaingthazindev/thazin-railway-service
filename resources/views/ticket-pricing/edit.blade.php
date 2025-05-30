@@ -22,12 +22,24 @@
 
 			<div class="form-group">
 				<x-input-label for="" value="Type" />
-				<select name="type" class="custom-select">
+				<select name="type" class="custom-select type-select">
 					<option value="one_time_ticket" @if (old('type', $ticket_pricing->type) === 'one_time_ticket') selected
 					@endif>One Time Ticket
 					</option>
 					<option value="one_month_ticket" @if (old('type', $ticket_pricing->type) === 'one_month_ticket') selected
 					@endif>One Month Ticket
+					</option>
+				</select>
+			</div>
+
+			<div class="form-group direction-component">
+				<x-input-label for="" value="Direction" />
+				<select name="direction" class="custom-select">
+					<option value="clockwise" @if (old('direction', $ticket_pricing->direction) === 'clockwise') selected @endif>
+						Clockwise
+					</option>
+					<option value="anti_clockwise" @if (old('direction', $ticket_pricing->direction) === 'anti_clockwise')
+					selected @endif>Anticlockwise
 					</option>
 				</select>
 			</div>
@@ -72,6 +84,20 @@
 					"format": "YYYY-MM-DD HH:mm:ss",
 				}
 			});
+
+			changeType();
+			$(document).on('change', '.type-select', function () {
+				changeType();
+			});
+
+			function changeType() {
+				let routeType = $('.type-select').val();
+				if (routeType === 'one_time_ticket') {
+					$('.direction-component').show();
+				} else {
+					$('.direction-component').hide();
+				}
+			}
 		});
 	</script>
 @endpush
