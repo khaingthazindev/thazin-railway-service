@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Select2AjaxController;
 use App\Http\Controllers\TopUpHistoryController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\TicketPricingController;
 use App\Http\Controllers\TicketInspectorController;
 use App\Http\Controllers\WalletTransactionController;
 
@@ -65,6 +66,9 @@ Route::middleware(['auth:admin_users', 'verified'])->group(function () {
 
    Route::resource('/route', RouteController::class);
    Route::get('/route-datatable', [RouteController::class, 'datatable'])->name('route-datatable');
+
+   Route::resource('/ticket-pricing', TicketPricingController::class);
+   Route::get('/ticket-pricing-datatable', [TicketPricingController::class, 'datatable'])->name('ticket-pricing-datatable');
 
    Route::resource('/ticket-inspector', TicketInspectorController::class);
    Route::get('/ticket-inspector-datatable', [TicketInspectorController::class, 'datatable'])->name('ticket-inspector-datatable');

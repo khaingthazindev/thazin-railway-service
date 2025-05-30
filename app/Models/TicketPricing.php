@@ -5,29 +5,30 @@ namespace App\Models;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Route extends Model
+class TicketPricing extends Model
 {
     protected $fillable = [
-        'slug',
-        'title',
-        'description',
-        'direction',
+        'type',
+        'price',
+        'offer_quantity',
+        'remain_quantity',
+        'started_at',
+        'ended_at',
     ];
 
-    public function stations(): BelongsToMany
-    {
-        return $this->belongsToMany(Station::class, 'route_stations', 'route_id', 'station_id')->withPivot('route_id', 'station_id', 'time');
-    }
+    protected $casts = [
+        'started_at' => 'datetime',
+        'ended_at' => 'datetime',
+    ];
 
-    protected function acsrDirection(): Attribute
+    protected function acsrType(): Attribute
     {
         return Attribute::make(
             get: function (mixed $value, array $attributes) {
-                $text = $attributes['direction'] ? ucwords(Str::replace('_', ' ', $attributes['direction'])) : '';
+                $text = $attributes['type'] ? ucwords(Str::replace('_', ' ', $attributes['type'])) : '';
                 $color = '#4b5563';
-                if ($attributes['direction'] === 'clockwise') {
+                if ($attributes['type'] === 'one_time_ticket') {
                     $color = '#16a34a';
                 } else {
                     $color = '#2563eb';
