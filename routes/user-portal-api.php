@@ -14,3 +14,7 @@ use App\Http\Controllers\Api\UserPortal\AuthController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::prefix('')->group(function () {
+    Route::post('register', [AuthController::class, 'register']);
+});
