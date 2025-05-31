@@ -40,13 +40,28 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
         'admin_users' => [
             'driver' => 'session',
             'provider' => 'admin_users',
         ],
+
         'users' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+        'users_api' => [
+            'driver' => 'sanctum',
+            'provider' => 'users',
+        ],
+
+        'ticket_inspectors' => [
+            'driver' => 'session',
+            'provider' => 'ticket_inspectors',
+        ],
+        'ticket_inspectors_api' => [
+            'driver' => 'sanctum',
+            'provider' => 'ticket_inspectors',
         ],
     ],
 
@@ -73,8 +88,8 @@ return [
             'model' => App\Models\AdminUser::class,
         ],
         'users' => [
-            'driver' => 'database',
-            'table' => 'users',
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
         ],
     ],
 

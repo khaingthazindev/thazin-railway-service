@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api\UserPortal;
 
-use App\Repositories\WalletRepository;
 use Illuminate\Http\Request;
 use App\Services\ResponseService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Repositories\WalletRepository;
 
 class AuthController extends Controller
 {
@@ -35,17 +36,50 @@ class AuthController extends Controller
 
             DB::commit();
 
-            $token = $user->createToken(config('app.name'))->plainTextToken;
-
-            return [
-                'data' => [
-                    'access_token' => $token
-                ],
-                'message' => 'Successfully registered',
-            ];
+            return ResponseService::success([
+                'access_token' => $user->createToken(config('app.name'))->plainTextToken
+            ], 'Successfully registered');
 
         } catch (\Exception $e) {
             DB::rollBack();
+            return ResponseService::fail($e->getMessage());
+        }
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+        DB::beginTransaction();
+        try {
+            // Using session base because call from same domain client 
+            if (Auth::guard('users')->attempt(['email' => $request->email, 'password' => $request->password])) {
+                $user = Auth::guard('users')->user();
+                $response = [
+                    'access_token' => $user->createToken(config('app.name'))->plainTextToken
+                ];
+            } else {
+                throw new \Exception('The credentials do not match our records.');
+            }
+
+            DB::commit();
+            return ResponseService::success($response, 'Successfully logged in');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ResponseService::fail($e->getMessage());
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        try {
+            // it will delete browser token and token from database 
+            $request->user()->currentAccessToken()->delete();
+
+            return ResponseService::success([], 'Successfully logged out');
+        } catch (\Exception $e) {
             return ResponseService::fail($e->getMessage());
         }
     }
