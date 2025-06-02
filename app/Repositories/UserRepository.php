@@ -21,6 +21,12 @@ class UserRepository implements BaseRepository
 		return $model;
 	}
 
+	public function findByEmail($email)
+	{
+		$model = $this->model::where('email', $email)->first();
+		return $model;
+	}
+
 	public function create(array $data)
 	{
 		$model = $this->model::create($data);
