@@ -96,14 +96,13 @@ class AuthController extends Controller
         DB::beginTransaction();
         try {
 
-            (new OTPRepository())->verify($request->otp_token, $request->code);
+            // (new OTPRepository())->verify($request->otp_token, $request->code);
 
             $decrypted_otp_token = decrypt($request->otp_token);
             $user = (new UserRepository())->findByEmail($decrypted_otp_token['email']);
             if (!$user) {
                 throw new Exception('The user is not found.');
             }
-
             $user = (new UserRepository())->update([
                 'email_verified_at' => date('Y-m-d H:i:s')
             ], $user->id);
@@ -112,6 +111,26 @@ class AuthController extends Controller
             return ResponseService::success([
                 'access_token' => $user->createToken(config('app.name'))->plainTextToken
             ], 'Successfully logged in');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return ResponseService::fail($e->getMessage());
+        }
+    }
+
+    public function resendOTP(Request $request)
+    {
+        $request->validate([
+            'otp_token' => ['required']
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $otp = (new OTPRepository())->resend($request->otp_token);
+
+            DB::commit();
+            return ResponseService::success($response = [
+                'otp_token' => $otp->token,
+            ], 'Successfully resent');
         } catch (Exception $e) {
             DB::rollBack();
             return ResponseService::fail($e->getMessage());
