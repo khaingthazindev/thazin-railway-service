@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\UserPortal;
 
+use App\Http\Resources\UserPortal\ProfileResource;
 use App\Services\ResponseService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,6 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('users_api')->user();
 
-        return ResponseService::success($user);
+        return ResponseService::success(new ProfileResource($user));
     }
 }
