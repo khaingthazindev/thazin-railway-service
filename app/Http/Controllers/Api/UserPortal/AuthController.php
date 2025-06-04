@@ -96,7 +96,7 @@ class AuthController extends Controller
         DB::beginTransaction();
         try {
 
-            // (new OTPRepository())->verify($request->otp_token, $request->code);
+            (new OTPRepository())->verify($request->otp_token, $request->code);
 
             $decrypted_otp_token = decrypt($request->otp_token);
             $user = (new UserRepository())->findByEmail($decrypted_otp_token['email']);
