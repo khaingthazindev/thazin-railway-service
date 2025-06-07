@@ -42,13 +42,16 @@ class WalletTransaction extends Model
                 $color = '#4b5563';
                 if ($value === 'add') {
                     $color = '#16a34a';
+                    $sign = '+';
                 } else {
                     $color = '#dc2626';
+                    $sign = '-';
                 }
 
                 return [
                     'text' => $text,
-                    'color' => $color
+                    'color' => $color,
+                    'sign' => $sign
                 ];
             },
         );
@@ -60,24 +63,30 @@ class WalletTransaction extends Model
             get: function (string $value) {
                 $text = $value ? ucfirst(str_replace('_', '', $value)) : '';
                 $color = '';
+                $icon = '';
                 switch ($value) {
                     case 'manual':
                         $color = '#f59e0b';
+                        $icon = asset('image/transaction.png');
                         break;
                     case 'top_up':
                         $color = '#2563eb';
+                        $icon = asset('image/topup.png');
                         break;
                     case 'buy_ticket':
                         $color = '#059669';
+                        $icon = asset('image/buy_ticket.png');
                         break;
                     default:
                         $color = '#4b5563';
+                        $icon = asset('image/transaction.png');
                         break;
                 }
 
                 return [
                     'text' => $text,
-                    'color' => $color
+                    'color' => $color,
+                    'icon' => $icon,
                 ];
             },
         );
