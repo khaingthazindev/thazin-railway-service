@@ -12,16 +12,16 @@ use App\Http\Resources\UserPortal\TopUpHistoryResource;
 
 class TopUpHistoryController extends Controller
 {
-    protected $topUpHistoryRepository;
+    protected $repo;
     public function __construct(TopUpHistoryRepository $topUpHistoryRepository)
     {
-        $this->topUpHistoryRepository = $topUpHistoryRepository;
+        $this->repo = $topUpHistoryRepository;
     }
 
     public function index(Request $request)
     {
         $user = Auth::guard('users_api')->user();
-        $top_up_histories = $this->topUpHistoryRepository->queryByUser($user)
+        $top_up_histories = $this->repo->queryByUser($user)
             ->with(['user:id,name,email'])
             ->when($request->search, function ($q1) use ($request) {
                 $q1->where('trx_id', 'like', "%{$request->search}%")
@@ -37,7 +37,7 @@ class TopUpHistoryController extends Controller
     public function show($trx_id)
     {
         $user = Auth::guard('users_api')->user();
-        $top_up_history = $this->topUpHistoryRepository->queryByUser($user)
+        $top_up_history = $this->repo->queryByUser($user)
             ->with(['user:id,name,email'])
             ->where('trx_id', $trx_id)
             ->firstOrFail();

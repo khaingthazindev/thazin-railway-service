@@ -12,15 +12,15 @@ use App\Http\Resources\UserPortal\WalletTransactionDetailResource;
 
 class WalletTransactionController extends Controller
 {
-    protected $walletTransactionRepository;
+    protected $repo;
     public function __construct(WalletTransactionRepository $walletTransactionRepository)
     {
-        $this->walletTransactionRepository = $walletTransactionRepository;
+        $this->repo = $walletTransactionRepository;
     }
     public function index(Request $request)
     {
         $user = Auth::guard('users_api')->user();
-        $wallet_transactions = $this->walletTransactionRepository->queryByUser($user)
+        $wallet_transactions = $this->repo->queryByUser($user)
             ->with(['user:id,name,email', 'sourceable'])
             ->when($request->search, function ($q1) use ($request) {
                 $q1->where('trx_id', 'like', "%{$request->search}%")
@@ -36,7 +36,7 @@ class WalletTransactionController extends Controller
     public function show($trx_id)
     {
         $user = Auth::guard('users_api')->user();
-        $wallet_transaction = $this->walletTransactionRepository->queryByUser($user)
+        $wallet_transaction = $this->repo->queryByUser($user)
             ->with(['user:id,name,email', 'sourceable'])
             ->where('trx_id', $trx_id)
             ->firstOrFail();
