@@ -22,6 +22,11 @@ class TopUpHistory extends Model
         'rejected_at',
     ];
 
+    protected $casts = [
+        'approved_at' => 'datetime',
+        'rejected_at' => 'datetime',
+    ];
+
     public function wallet()
     {
         return $this->belongsTo(Wallet::class, 'wallet_id', 'id');

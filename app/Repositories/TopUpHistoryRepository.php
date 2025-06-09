@@ -118,4 +118,9 @@ class TopUpHistoryRepository implements BaseRepository
 
 		return $model;
 	}
+
+	public function queryByUser($user)
+	{
+		return $this->model::where('user_id', $user->id);
+	}
 }

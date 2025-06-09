@@ -19,6 +19,11 @@ class WalletTransaction extends Model
         'description',
     ];
 
+    protected $casts = [
+        'approved_at' => 'datetime',
+        'rejected_at' => 'datetime',
+    ];
+
     public function wallet()
     {
         return $this->belongsTo(Wallet::class, 'wallet_id', 'id');
