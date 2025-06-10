@@ -62,7 +62,7 @@
 			}).addTo(map);
 
 			let myIcon = L.icon({
-				iconUrl: "{{asset('image/station.png')}}",
+				iconUrl: "{{asset('image/station_marker.png')}}",
 				iconSize: [35, 35],
 				iconAnchor: [20, 35],
 				popupAnchor: [-3, -36],
